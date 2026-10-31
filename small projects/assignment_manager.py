@@ -60,7 +60,14 @@ def complete_assignment(assignments, title):
             print("Assignment completed!")
             return
     print("Assignment not found!")
-
+#counts how many assignments are unfinished
+def count_pending(assignments):
+    count=0
+    for assignment in assignments:
+        if not assignment["completed"]:
+            count+=1
+    return count
+    
 # Main program
 def main():
     assignments=load_assignments()
@@ -69,7 +76,8 @@ def main():
         print("1. Show pending assignments")
         print("2. Add assignment")
         print("3. Complete assignment")
-        print("4. Save and exit")
+        print("4. number of pending assignments")
+        print("5. Save and exit")
         choice = input("Choose an option: ")
         if choice == "1":
             show_pending(assignments)
@@ -79,12 +87,14 @@ def main():
         elif choice == "3":
             title = input("Enter assignment to complete: ")
             complete_assignment(assignments, title)
-        elif choice == "4":
+        elif choice =="4" :
+            pending = count_pending(assignments)
+            print(f"There are {pending} pending assignments")
+        elif choice == "5":
             save_assignments(assignments)
             print("Goodbye!")
             break
         else:
             print("Invalid option!")
-
-if __name__ == "__main__":
+if __name__=="__main__" :
     main()
